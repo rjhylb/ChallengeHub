@@ -23,18 +23,9 @@
 * Problems – Without automated flags or summaries, its hard to spot problematic records.  
 * Success – Flagged records are easy to find and review. The system stays reliable.
 
+**2. Domain Vocabulary**
 
-  
-
-
-  
-
-
-  
-
-**2. Domain Vocabulary **
-
-| TERM | DEFINITION |
+| Term | Definition|
 | :---- | :---- |
 | Participant | A user who joins challenges and records activities. |
 | Challenge | A goal based activity with a specific type, target and date range. |
@@ -62,7 +53,7 @@
 
 **4. Non-Functional Backlog**
 
-| Requirement ID | Quality Attribute | Requirement Statement | Engineering Target / Standard |
+| Requirement ID | Quality Attribute | Requirement Statement | Target |
 | :--- | :--- | :--- | :--- |
 | NFB-01 | Performance & Responsiveness| The system shall process and confirm valid activity submissions within 2 seconds during interactive CLI execution| Low-latency user feedback. |
 | NFB-02 | Usability & Error Feedback| The system shall display clear, actionable validation error messages upon receiving invalid input (e.g, negative amounts, invalid dates, unlinked IDs)| Avoid cryptic stack traces; guide user correction. |
@@ -71,20 +62,21 @@
 | NFB-05 | Automated Verifiability | The system should be fully verifiable using automated `pytest` test suites covering normal happy-paths, boundary values, and state-preserving exception cases | High test coverage; automated regression suite. |
 
 **5. Client Needs & Feature Prioritization**
- **Must Have (Core System Scope)**
-*   **Record activities successfully:** Enrolled participants can log activities with amounts, dates and notes
-*   **Validate participant enrollment:** System checks active enrollment before accepting activity records
-*   **Track participant progress accurately:** Calculate dynamic progress metrics toward challenge goal target
-*   **Create and manage challenges:** Organizers can set up challenge dates, categories, units, and targets
-*   **Store activity records reliably:** Persistent data storage across application restarts
-*   **Review flagged records:** Administrators can audit anomalous or incomplete activity records 
+
+**Must Have (Core System Scope)**
+* Record activities successfully: Enrolled participants can log activities with amounts, dates and notes
+* Validate participant enrollment: System checks active enrollment before accepting activity records
+* Track participant progress accurately: Calculate dynamic progress metrics toward challenge goal target
+* Create and manage challenges: Organizers can set up challenge dates, categories, units, and targets
+* Store activity records reliably: Persistent data storage across application restarts
+* Review flagged records: Administrators can audit anomalous or incomplete activity records 
 
  **Should Have (Enhancements & Future Growth)**
-*   **Activity history tracking:** Detailed chronological view of a participant's past submissions 
-*   **Challenge summary reports:** High-level aggregated statistics for organizers and administrators
-*   **Completion notifications:** Automated alerts when a participant reaches 100% of their goal
-*   **Exportable reports:** Structured export capabilities (e.g, CSV / JSON summaries)
-*   **Audit logs for administrators:** Detailed system audit trails for administrative review
-*   **Enhanced reporting and analytics:** Visual progress charts and participation trends
+* Activity history tracking: Detailed chronological view of a participant's past submissions 
+* Challenge summary reports: High-level aggregated statistics for organizers and administrators
+* Completion notifications: Automated alerts when a participant reaches 100% of their goal
+* Exportable reports: Structured export capabilities (e.g, CSV / JSON summaries)
+* Audit logs for administrators: Detailed system audit trails for administrative review
+* Enhanced reporting and analytics: Visual progress charts and participation trends
 
 

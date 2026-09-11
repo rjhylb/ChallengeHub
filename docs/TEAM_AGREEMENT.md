@@ -6,7 +6,7 @@
 
 ## 1. Core Objectives and Principles
 This agreement establishes the collaborative framework, engineering standards, and communication protocols for our 4-member team. Our shared commitment is to:
-1. Deliver a robust, high-quality **ChallengeHub** system that tells a single, consistent software-design story across requirements, UML, architecture, code, and verification.
+1. Deliver a robust, high-quality ChallengeHub system that tells a single, consistent software-design story across requirements, UML, architecture, code, and verification.
 2. Maintain a healthy, supportive, and egoless team dynamic where knowledge is shared and collective ownership is practiced.
 3. Adhere to the software engineering code of ethics by upholding professional competence, consistency, and academic integrity.
 

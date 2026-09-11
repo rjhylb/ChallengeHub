@@ -14,16 +14,16 @@ UC \- 06: Review Summary
 
 **Textual specifications** 
 
-| ID / name | UC \- 01: Create Challenge |
+| ID / name| UC \- 01: Create Challenge |
 | :---- | :---- |
 | **Primary actor** | Organizer |
-| **Stakeholders** | Organizer – easy challenge setup Participant \- need clear goal targets and acceptable date ranges |
+| **Stakeholders** | Organizer – Needs intuitive challenge setup Participant \- Needs clear goal targets, units, and dates |
 | **Trigger** | Organizer chooses to create a new challenge. |
 | **Preconditions** | Organizer should be authorized and authenticated in the system. |
-| **Main success scenario** | Organizer selects the option to create a new challenge Organizer inputs challenge details (name, category, activity type, goal unit’s, target, dates) System validates the details (name, category, activity type, goal unit’s, target, dates)  System saves the new Challenge System confirms the added challenge. |
-| **Alternative/exception flows** | 3A \- Invalid inputs \- System flags invalid fields |
+| **Main success scenario** | Organizer selects the option to create a new challenge Organizer inputs challenge details (name, category, activity_type, goal_unit, goal_target, start_date, end_date) System validates that dates and numeric targets are positive and logical System saves the new Challenge entity System confirms the added challenge. |
+| **Alternative flows** | 3A \- Invalid inputs \- System flags invalid fields, displays error messages, and cancels saving |
 | **Postconditions** | A new Challenge record exists in the storage open for enrollemnt. No entry is saved on failure |
-| **Related requirements** | FB-03, NFB-02, NFB-03 |
+| **Related requirements** | FB-01, NFB-02, NFB-03 |
 
 | ID / name | UC \- 02: Manage Challenge |
 | :---- | :---- |

@@ -1,3 +1,5 @@
+# System Notes
+
 ## 1. System Overview & Context
 ChallengeHub is an existing Python prototype used to manage virtual wellness and productivity challenges
 

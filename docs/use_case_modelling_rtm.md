@@ -101,10 +101,12 @@ UC \- 06: Review Summary
 | :---- | :---- | :---- | :---- | :---- |
 | FB-01 | Organizers shall create and manage challenges with specific dates, units, and targets | Functional | UC-01 (Steps 1–5)<br>UC-02 (Steps 1–4) | tests/test_challenges.py::test_create_challenge_success |
 | FB-02 | Participants shall enroll in active challenges and record activity entries | Functional | UC-03 (Steps 1–6)<br>UC-05 (Steps 1–5)| tests/test_activities.py::test_record_activity_success |
-| FB-03 | Organizers can create and manage challenges. | Functional | UC-01 Create Challenge: All steps UC-02 Manage Challenge: All steps |
-| FB-04 | The system validates participant enrollment before recording activities.  | Functional | UC-03 Join Challenge: Step 4 UC-05 Record Activity: Step 2 and Alternative Flow 2A |
-| FB-05 | Administrators can review flagged activity records. | Functional | UC-06 Review Summary: All steps  |
-| FB-06 | System stores valid activity records reliably. | Functional | UC-05 Record Activity: Main Success Scenario: Step 4 |
+| FB-03 | System shall validate active enrollment before storing activity entries | Functional | UC-03 (Step 4)<br>UC-05 (Step 2, Alt 2A) | tests/test_activities.py::test_unlinked_participant_rejected |
+| FB-04 | Invalid submissions shall raise an exception, leaving stored state and progress strictly unchanged | Functional | UC-05 (Alt 4A, Postconditions) | tests/test_activities.py::test_invalid_amount_preserves_state |
+| FB-05 | System shall support amount-based and count-based progress calculation model | Functional | UC-04 (Steps 2–4) | tests/test_progress.py::test_calculation_strategies
+| FB-06 | System shall generate dynamic progress summaries and administrative review dashboards | Functional | UC-04 (Step 4)<br>UC-06 (Steps 1–2) | tests/test_cli.py::test_admin_review_summary|
+| FB-07 | System shall persistently store all participants, challenges, enrollments, and activity logs | Functional | UC-01, UC-03, UC-05 (Postconditions) | tests/test_persistence.py::test_sqlite_persistence |
+
 | NFB-01 | System shall complete valid activity recording within 2 seconds. | Non-Functional | UC-04 View Challenge Progress: Step 4 UC-05 Record Activity: Step 6 |
 | NFB-02 | Display clear validation messages for invalid input. | Non-Functional | UC-01 Create Challenge: Alternative Flow 3A UC-02 Manage Challenge: Alternative Flow 3A UC-03 Join Challenge: Alternative Flows 3A, 4A UC-05 Record Activity: Alternative Flow 2A, 4A UC-06 Review Summary: Alternative Flow 1A |
 | NFB-03 | Preserve all accepted activity records without data loss. | Non-Functional | UC-01 Create Challenge: Postconditions UC-02 Manage Challenge: Postconditions UC-05 Record Activity: Postconditions UC-06 Review Summary: Postconditions |

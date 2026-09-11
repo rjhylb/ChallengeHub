@@ -57,6 +57,7 @@
 | FB-04 | The system validates participant enrollment before recording activities. | Participant / Organizer |
 | FB-05 | Administrators can review flagged activity records. | Administrator |
 | FB-06 | The system stores valid activity records. | All Stakeholders |
+| FB-07 | The system shall reject invalid activity records (e.g. negative amounts, or dates outside active challege limits) with an explicit exception, leaving stored database records and calculated progress strictly unchanged.
 
 Non Functional Backlog
 

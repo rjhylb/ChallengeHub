@@ -105,7 +105,7 @@ If technical disagreements or communication issues arise:
 ## 7. Team Signatures & Commitments
 By signing this contract, we commit to adhering to this Team Agreement:
 
-*   **RACHEL JOY BALDO (Project Manager / Requirements):** ___________________________ Date: ___________
-*   **MARK ANGELO AYCARDO (Software Architect / Developer):** ___________________________ Date: ___________
-*   **JIAN BERNARD QUINTON (Git Master / Integration):** ___________________________ Date: ___________
-*   **ISSA DUMLAO (QA Lead / Validation):** ___________________________ Date: ___________
+*   **RACHEL JOY BALDO (Project Manager / Requirements):** Date: September 05, 2026
+*   **MARK ANGELO AYCARDO (Software Architect / Developer):** Date:September 05, 2026
+*   **JIAN BERNARD QUINTON (Git Master / Integration):** Date: September 05, 2026
+*   **ISSA DUMLAO (QA Lead / Validation):** Date: September 05, 2026

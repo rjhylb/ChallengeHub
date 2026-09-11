@@ -1,3 +1,5 @@
+# Stakeholder and Backlog Analysis
+
 **1. Analysis of Core Stakeholders**
 
    1.    Organizer  \- The organizer creates and manages challenges. They set the active type, goal target, and date range for each challenge.

@@ -106,8 +106,9 @@ UC \- 06: Review Summary
 | FB-05 | System shall support amount-based and count-based progress calculation model | Functional | UC-04 (Steps 2–4) | tests/test_progress.py::test_calculation_strategies
 | FB-06 | System shall generate dynamic progress summaries and administrative review dashboards | Functional | UC-04 (Step 4)<br>UC-06 (Steps 1–2) | tests/test_cli.py::test_admin_review_summary|
 | FB-07 | System shall persistently store all participants, challenges, enrollments, and activity logs | Functional | UC-01, UC-03, UC-05 (Postconditions) | tests/test_persistence.py::test_sqlite_persistence |
-
-| NFB-01 | System shall complete valid activity recording within 2 seconds. | Non-Functional | UC-04 View Challenge Progress: Step 4 UC-05 Record Activity: Step 6 |
-| NFB-02 | Display clear validation messages for invalid input. | Non-Functional | UC-01 Create Challenge: Alternative Flow 3A UC-02 Manage Challenge: Alternative Flow 3A UC-03 Join Challenge: Alternative Flows 3A, 4A UC-05 Record Activity: Alternative Flow 2A, 4A UC-06 Review Summary: Alternative Flow 1A |
-| NFB-03 | Preserve all accepted activity records without data loss. | Non-Functional | UC-01 Create Challenge: Postconditions UC-02 Manage Challenge: Postconditions UC-05 Record Activity: Postconditions UC-06 Review Summary: Postconditions |
+| NFB-01 | Valid activity submissions shall be processed within 2 seconds | Non-Functional | UC-04 (Step 4)<br>UC-05 (Step 6) | tests/test_performance.py::test_recording_latency |
+| NFB-02 | System shall display clear validation messages for invalid inputs | Non-Functional |UC-01–UC-06 (Alternative Exception Flows) | tests/test_activities.py::test_error_message_clarity |
+| NFB-03 | System shall preserve accepted records without data corruption across restarts | Non-Functional | UC-01, UC-02, UC-05, UC-06 (Postconditions) | tests/test_persistence.py::test_data_integrity_across_restarts |
+| NFB-04 | System should adopt a layered architecture (CLI, Business Logic, Persistence) | Non-Functional | Architectural Constraint | Inspection of challengehub/ package separation |
+| NFB-05 | System should be verifiable using automated pytest test suites) | Non-Functional | All Use Cases | Full suite execution (python -m pytest -q) |
 

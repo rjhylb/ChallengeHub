@@ -1,4 +1,4 @@
-**Use-Case Modeling**
+**1. Use-Case Modeling**
 
 UC \- 01: Create Challenge
 
@@ -12,9 +12,10 @@ UC \- 05: Record Activity
 
 UC \- 06: Review Summary
 
-**Textual specifications** 
+**Textual Specifications** 
+**UC \- 01: Create Challenge **
 
-| ID / name| UC \- 01: Create Challenge |
+| ID / Name| | Specification Details |
 | :---- | :---- |
 | **Primary actor** | Organizer |
 | **Stakeholders** | Organizer – Needs intuitive challenge setup Participant \- Needs clear goal targets, units, and dates |

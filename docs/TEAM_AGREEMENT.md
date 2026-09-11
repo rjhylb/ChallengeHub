@@ -66,7 +66,7 @@ To prevent code conflicts and maintain a high-integrity history, we enforce a st
     *   **The "Never Break the Build" Rule:** A branch cannot be merged if any pytest validation fails or leaves errors.
 4.  **Pull Request (PR) & Peer Review:**
     *   Once local verification is complete, the developer pushes their branch and creates a PR into `main`.
-    *   **Mandatory Approval:** At least one team member (other than the author) must review the PR, verify the test results, inspect code readability, and provide approval before merging is permitted.
+    *   **Mandatory Approval:** At least one team member must review the PR, verify the test results, inspect code readability, and provide approval before merging is permitted.
 
 ---
 

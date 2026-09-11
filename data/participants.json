@@ -1,0 +1,17 @@
+[
+  {
+    "participant_id": "P001",
+    "name": "Alyssa Cruz",
+    "email": "alyssa@example.edu"
+  },
+  {
+    "participant_id": "P002",
+    "name": "Marco Reyes",
+    "email": "marco@example.edu"
+  },
+  {
+    "participant_id": "P003",
+    "name": "Nina Santos",
+    "email": "nina@example.edu"
+  }
+]

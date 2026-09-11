@@ -1,0 +1,4 @@
+record_id,participant_id,challenge_id,activity_type,amount,activity_date,note
+AR-0001,P001,C001,walk,3.5,2026-08-03,Morning walk
+AR-0002,P001,C001,walk,4.0,2026-08-05,Campus walk
+AR-0003,P003,C002,session,1,2026-08-04,Study sprint

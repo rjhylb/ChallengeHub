@@ -1,0 +1,17 @@
+[
+  {
+    "participant_id": "P001",
+    "challenge_id": "C001",
+    "joined_on": "2026-08-01"
+  },
+  {
+    "participant_id": "P002",
+    "challenge_id": "C001",
+    "joined_on": "2026-08-02"
+  },
+  {
+    "participant_id": "P003",
+    "challenge_id": "C002",
+    "joined_on": "2026-08-01"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "challenge_id": "C001",
+    "name": "Walk 20K",
+    "category": "Wellness",
+    "activity_type": "walk",
+    "goal_unit": "km",
+    "goal_target": 20.0,
+    "start_date": "2026-08-01",
+    "end_date": "2026-08-31"
+  },
+  {
+    "challenge_id": "C002",
+    "name": "Focus Sessions",
+    "category": "Productivity",
+    "activity_type": "session",
+    "goal_unit": "sessions",
+    "goal_target": 5.0,
+    "start_date": "2026-08-01",
+    "end_date": "2026-08-31"
+  }
+]

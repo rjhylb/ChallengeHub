@@ -14,4 +14,9 @@ Inspection of the initial sample data log (`data/activities.csv`) confirms that 
 | **`activity_date`** | String (YYYY-MM-DD) | Date string indicating when the activity was performed. | `2026-02-01` |
 | **`note`** | String | Optional qualitative description or context provided by the user. | `Morning walk` |
 
+## 3. Observable Prototype Behavior (Baseline CLI Findings)
+Execution of the prototype CLI module (`python -m challengehub.cli`) provided empirical proof of the core domain engine's data loading, progress calculation, and administrative filtering capabilities
 
+1. **System Resource Counting:**
+   * **Observed State:** `Participants: 3, Challenges: 2, Activities: 3` 
+   * **Analysis:** The persistence layer successfully loads relational records into memory upon initialization

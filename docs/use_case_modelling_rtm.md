@@ -94,7 +94,7 @@ UC \- 06: Review Summary
 | **Related requirements** | FB-06, NFB-02, NFB-03 |
 
 
-**Requirements Traceability**
+## Requirements Traceability
 
 
 | Requirement ID | Statement | Type | Use Case and Reference | pytest Verification |

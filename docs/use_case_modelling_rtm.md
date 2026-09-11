@@ -12,10 +12,11 @@ UC \- 05: Record Activity
 
 UC \- 06: Review Summary
 
-**Textual Specifications** 
-**UC \- 01: Create Challenge **
+**2. Textual Specifications** 
 
-| ID / Name| | Specification Details |
+**UC-01: Create Challenge**
+
+| ID / name | UC \- 01: Create Challenge |
 | :---- | :---- |
 | **Primary actor** | Organizer |
 | **Stakeholders** | Organizer – Needs intuitive challenge setup Participant \- Needs clear goal targets, units, and dates |
@@ -26,16 +27,18 @@ UC \- 06: Review Summary
 | **Postconditions** | A new Challenge record exists in the storage open for enrollemnt. No entry is saved on failure |
 | **Related requirements** | FB-01, NFB-02, NFB-03 |
 
+**UC-02: Manage Challenge**
+
 | ID / name | UC \- 02: Manage Challenge |
 | :---- | :---- |
 | **Primary actor** | Organizer |
 | **Stakeholders** | Organizer – needs to change some challenges Participant – needs a consistent and fair rules. |
 | **Trigger** | Organizer selects an existing challenge to manage |
 | **Preconditions** | Organizer should be authorized and authenticated in the system. The Challenge should already exist. |
-| **Main success scenario** | Organizer selects the challenge they want to change. Organizers edits parameters (name, category, activity type, goal unit’s, target, dates) System verifies changes do not conflicts with existing records System confirms the changes  |
-| **Alternative/exception flows** | 3A – Conflicting update submitted (e.g. new end dates will end the challenge for some participant) \- Reject Submission and displays the reason for the rejection. |
+| **Main success scenario** | Organizer selects the challenge they want to change. Organizers edits parameters (name, category, activity_type, goal_unit, goal_target, start_date, end_date) System verifies changes do not conflicts with existing records System confirms the changes  |
+| **Alternative flows** | 3A – Conflicting update submitted (e.g. new end dates will end the challenge for some participant) \- Reject Submission and displays the reason for the rejection. |
 | **Postconditions** | Challenge updates are saved No entry is saved on failure |
-| **Related requirements** | FB-03, NFB-02, NFB-03 |
+| **Related requirements** | FB-01, NFB-02, NFB-03 |
 
 | ID / name | UC \- 03 Join Challenge |
 | :---- | :---- |

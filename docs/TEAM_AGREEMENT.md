@@ -19,8 +19,8 @@ S
 *   **Primary Focus:** Project coordination, requirements elicitation, and stakeholder scope.
 *   **Key Responsibilities:**
     *   Act as the primary facilitator for team meetings, tracking sprint goals and weekly progress.
-    *   Maintain the **Product Backlog** (mapping use cases, functional "shall" rules, and non-functional "should" constraints).
-    *   Lead the compilation of the **Requirements Baseline (Checkpoint 1)** deliverables.
+    *   Maintain the Product Backlog (mapping use cases, functional rules, and nonfunctional constraints).
+    *   Lead the compilation of the Requirements Baseline (Checkpoint 1)*deliverables.
     *   Monitor task card updates and coordinate the division of labor.
 
 ### **MARK ANGELO AYCARDO Software Architect Developer**

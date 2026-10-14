@@ -1,0 +1,589 @@
+<mxfile host="app.diagrams.net" pages="5">
+  <diagram name="1 Architecture Overview &amp; Layering" id="PpM6b-UbHNveXZ8uzEzm">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hdr_banner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#000066;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="64" width="700" x="80" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="page_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;span style=&quot;color: #ffffff;&quot;&gt;&lt;b style=&quot;font-size: 18px;&quot;&gt;1 ARCHITECTURE OVERVIEW&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;&lt;b&gt;ChallengeHub Logical Layer Decomposition &amp;amp; Boundary Rules&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="600" x="130" y="37" as="geometry" />
+        </mxCell>
+        <mxCell id="layer_pres" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=26;fillColor=#f8f9fa;strokeColor=#6c757d;strokeWidth=1.5;fontSize=11;fontColor=#000000;rounded=1;arcSize=3;" value="&lt;b&gt;Presentation Layer&lt;/b&gt;" vertex="1">
+          <mxGeometry height="165" width="700" x="80" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_cli" parent="layer_pres" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=4;fontColor=#000000;fontSize=11;" value="&lt;b&gt;CLI Interface Boundary&lt;/b&gt;&lt;br&gt;&lt;i&gt;challengehub/cli.py&lt;/i&gt;&lt;hr style=&quot;margin: 4px 0;&quot;&gt;&lt;p style=&quot;margin:0px; text-align:left; font-size:9.5px; line-height: 1.35;&quot;&gt;• Coordinates interactive user workflows (UC-04 View Progress, UC-05 Record Activity)&lt;br&gt;• Parses terminal inputs (participant_id, challenge_id, activity_type, amount, activity_date, note)&lt;br&gt;• Formats tabular console views and presents handled validation error notices (NFB-02)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="112" width="610" x="45" y="36" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_cli_mgr" edge="1" parent="1" source="comp_cli" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;fontSize=10;align=center;endArrow=block;endFill=1;" target="comp_mgr" value="Invokes record_activity() &amp;amp; progress()">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_mgr_models" edge="1" parent="1" source="comp_mgr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.2;strokeColor=#000000;fontColor=#000000;fontSize=9.5;exitX=0.126;exitY=1.009;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endFill=0;exitPerimeter=0;" target="comp_models" value="Inspects &amp;amp; Instantiates">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="201.9" y="499" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_mgr_strat" edge="1" parent="1" source="comp_mgr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.2;strokeColor=#000000;fontColor=#000000;fontSize=9.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endFill=0;" target="comp_strat" value="Delegates Calculation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_mgr_stor" edge="1" parent="1" source="comp_mgr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.2;strokeColor=#000000;fontColor=#000000;fontSize=9.5;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=open;endFill=0;exitX=0.87;exitY=1.001;exitDx=0;exitDy=0;exitPerimeter=0;" target="comp_stor" value="Dispatches Persistence">
+          <mxGeometry relative="1" x="-0.1468" as="geometry">
+            <mxPoint x="650" y="498.1" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="audit_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;strokeWidth=1;align=center;verticalAlign=top;spacingTop=6;spacingLeft=10;spacingRight=10;fontColor=#000000;fontSize=10;" value="&lt;b&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Architecture Audit &amp;amp; Boundary Fitness Rules&lt;/font&gt;&lt;/b&gt;&lt;hr style=&quot;margin: 4px 0;&quot;&gt;&lt;p style=&quot;margin:0px; text-align:left; font-size:9.5px; line-height: 1.4;&quot;&gt;&lt;b&gt;✓ Allowed Dependencies (Strictly Downward):&lt;/b&gt; Presentation (cli.py) → Application (manager.py) → Domain Core (models.py, strategies.py) &amp;amp; Storage (storage.py).&lt;br&gt;&lt;b&gt;✗ Forbidden Dependencies (Audited &amp;amp; Prevented):&lt;/b&gt; Domain models contain zero persistence or UI imports; Storage never imports Application/Presentation; CLI never bypasses ChallengeManager to access storage directly.&lt;/p&gt;" vertex="1">
+          <mxGeometry height="100" width="700" x="80" y="815" as="geometry" />
+        </mxCell>
+        <mxCell id="layer_dom" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=26;fillColor=#f8f9fa;strokeColor=#6c757d;strokeWidth=1.5;fontSize=11;fontColor=#000000;rounded=1;arcSize=3;" value="&lt;b&gt;Domain Core &amp;amp; Persistence Layer&lt;/b&gt;" vertex="1">
+          <mxGeometry height="210" width="700" x="80" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_models" parent="layer_dom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=4;fontSize=11;fontColor=#000000;" value="&lt;b&gt;Domain Entities&lt;/b&gt;&lt;br&gt;&lt;i&gt;challengehub/models.py&lt;/i&gt;&lt;hr style=&quot;margin: 4px 0;&quot;&gt;&lt;p style=&quot;margin:0px; text-align:left; font-size:9.5px; line-height: 1.3;&quot;&gt;• Participant, Challenge, Enrollment&lt;br&gt;• ActivityRecord (Immutable dataclass)&lt;br&gt;• State representation &amp;amp; identity rules&lt;br&gt;&lt;b&gt;• Zero outbound I/O dependencies&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="195" x="25" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_strat" parent="layer_dom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=4;fontColor=#000000;fontSize=11;" value="&lt;b&gt;Progress Strategies&lt;/b&gt;&lt;br&gt;&lt;i&gt;challengehub/strategies.py&lt;/i&gt;&lt;hr style=&quot;margin: 4px 0;&quot;&gt;&lt;p style=&quot;margin:0px; text-align:left; font-size:9.5px; line-height: 1.3;&quot;&gt;• «interface» ProgressStrategy&lt;br&gt;• AmountProgressStrategy (Distance sum)&lt;br&gt;• CountProgressStrategy (Sessions count)&lt;br&gt;• Computes dynamic totals on query&lt;br&gt;&lt;b&gt;• No stored/persisted progress total&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="200" x="250" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_stor" parent="layer_dom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=4;fontColor=#000000;fontSize=11;" value="&lt;b&gt;Flat-File Persistence&lt;/b&gt;&lt;br&gt;&lt;i&gt;challengehub/storage.py&lt;/i&gt;&lt;hr style=&quot;margin: 4px 0;&quot;&gt;&lt;p style=&quot;margin:0px; text-align:left; font-size:9.5px; line-height: 1.3;&quot;&gt;• load_participants(), load_challenges()&lt;br&gt;• load_enrollments(), load_activities()&lt;br&gt;• save_activities() (Write-through append)&lt;br&gt;• Direct I/O to data/*.json and *.csv&lt;br&gt;&lt;b&gt;• Isolated from presentation &amp;amp; UI&lt;/b&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="200" x="475" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="layer_app" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=26;fillColor=#f8f9fa;strokeColor=#6c757d;strokeWidth=1.5;fontSize=11;fontColor=#000000;rounded=1;arcSize=3;" value="&lt;b&gt;Application Coordination Layer&lt;/b&gt;" vertex="1">
+          <mxGeometry height="185" width="700" x="80" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_mgr" parent="layer_app" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.2;align=center;verticalAlign=top;spacingTop=4;fontColor=#000000;fontSize=11;" value="&lt;b&gt;ChallengeManager (Application Coordinator)&lt;/b&gt;&lt;br&gt;&lt;i&gt;challengehub/manager.py&lt;/i&gt;&lt;hr style=&quot;margin: 4px 0;&quot;&gt;&lt;p style=&quot;margin:0px; text-align:left; font-size:9.5px; line-height: 1.35;&quot;&gt;• Central orchestrator for domain use cases (UC-05 Record Activity, UC-04 View Progress)&lt;br&gt;• Enforces preconditions in memory: referential check, active enrollment, date bounds, amount &amp;gt; 0&lt;br&gt;• Preserves failure invariant FB-04: raises specific ValueError with ZERO state mutation on failure&lt;br&gt;• Invokes ProgressStrategy dynamically on demand (UC-04 dynamic derived query without stored total)&lt;br&gt;• Triggers atomic write-through persistence to storage.py upon valid completion (FB-07)&lt;/p&gt;" vertex="1">
+          <mxGeometry height="126" width="610" x="45" y="38" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="2 Implementation Class Model" id="iO-Q_SFjgRUZ9L6wbu6H">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hdr_banner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#000066;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="64" width="780" x="20" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="page_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;b style=&quot;font-size: 17px; color: #ffffff;&quot;&gt;2 IMPLEMENTATION CLASS MODEL&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #e0e0e0;&quot;&gt;ChallengeHub Structural Blueprint, Operations &amp;amp; Association Multiplicities&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="600" x="125" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_mgr" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=12;fontColor=#000000;" value="ChallengeManager" vertex="1">
+          <mxGeometry height="220" width="350" x="30" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_mgr_attrs" parent="cls_mgr" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="- data_dir: Path&#xa;+ participants: dict[str, Participant]&#xa;+ challenges: dict[str, Challenge]&#xa;+ enrollments: list[Enrollment]&#xa;+ activities: list[ActivityRecord]&#xa;- _strategies: dict[str, ProgressStrategy]" vertex="1">
+          <mxGeometry height="76" width="350" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_mgr_sep" parent="cls_mgr" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#82b366;" value="" vertex="1">
+          <mxGeometry height="8" width="350" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_mgr_ops" parent="cls_mgr" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ record_activity(participant_id: str, challenge_id: str, activity_type: str,&#xa;amount: float, activity_date: date, note: str = &quot;&quot;): ActivityRecord&#xa;+ progress(participant_id: str, challenge_id: str): dict&#xa;+ reload(): void&#xa;- _validate_preconditions(participant_id: str, challenge_id: str,&#xa;activity_type: str, amount: float, activity_date: date): void&#xa;- _get_strategy(goal_unit: str): ProgressStrategy&#xa;&#xa;" vertex="1">
+          <mxGeometry height="108" width="350" y="112" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ar" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.5;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=12;fontColor=#000000;" value="«entity, @dataclass»&#xa;ActivityRecord" vertex="1">
+          <mxGeometry height="220" width="220" x="580" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ar_attrs" parent="cls_ar" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ record_id: str&#xa;+ participant_id: str&#xa;+ challenge_id: str&#xa;+ activity_type: str&#xa;+ amount: float&#xa;+ activity_date: date&#xa;+ note: str = &quot;&quot;" vertex="1">
+          <mxGeometry height="110" width="220" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ar_sep" parent="cls_ar" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="8" width="220" y="138" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ar_ops" parent="cls_ar" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ to_dict(): dict&#xa;+ __post_init__(): void" vertex="1">
+          <mxGeometry height="74" width="220" y="146" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ch" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="«entity, @dataclass»&#xa;Challenge" vertex="1">
+          <mxGeometry height="180" width="200" x="-120" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ch_attrs" parent="cls_ch" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ challenge_id: str&#xa;+ name: str&#xa;+ activity_type: str&#xa;+ goal_unit: str&#xa;+ goal_target: float&#xa;+ start_date: date&#xa;+ end_date: date" vertex="1">
+          <mxGeometry height="106" width="200" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ch_sep" parent="cls_ch" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#d6b656;" value="" vertex="1">
+          <mxGeometry height="8" width="200" y="134" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ch_ops" parent="cls_ch" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ is_active(when: date): bool" vertex="1">
+          <mxGeometry height="38" width="200" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_pt" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="«entity, @dataclass»&#xa;Participant" vertex="1">
+          <mxGeometry height="102" width="180" x="320" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_pt_attrs" parent="cls_pt" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ participant_id: str&#xa;+ name: str&#xa;+ email: str" vertex="1">
+          <mxGeometry height="74" width="180" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_en" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="«entity, @dataclass»&#xa;Enrollment" vertex="1">
+          <mxGeometry height="102" width="180" x="110" y="501" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_en_attrs" parent="cls_en" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ participant_id: str&#xa;+ challenge_id: str&#xa;+ joined_on: date" vertex="1">
+          <mxGeometry height="74" width="180" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_strat" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=34;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1.5;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="«interface, ABC»&#xa;ProgressStrategy" vertex="1">
+          <mxGeometry height="85" width="330" x="570" y="600.13" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_strat_ops" parent="cls_strat" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ calculate(records: list[ActivityRecord], challenge: Challenge): float" vertex="1">
+          <mxGeometry height="51" width="330" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_amt_strat" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="AmountProgressStrategy" vertex="1">
+          <mxGeometry height="70" width="230" x="475" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_amt_ops" parent="cls_amt_strat" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ calculate(records, challenge): float&#xa;&lt;i&gt;(Sums record.amount for km/miles)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="44" width="230" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_cnt_strat" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="CountProgressStrategy" vertex="1">
+          <mxGeometry height="70" width="230" x="750" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_cnt_ops" parent="cls_cnt_strat" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ calculate(records, challenge): float&#xa;&lt;i&gt;(Counts qualifying session records)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="44" width="230" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg_storage" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="«module» storage.py" vertex="1">
+          <mxGeometry height="110" width="240" x="-10" y="925" as="geometry" />
+        </mxCell>
+        <mxCell id="pkg_storage_ops" parent="pkg_storage" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ load_participants(path): dict&#xa;+ load_challenges(path): dict&#xa;+ load_enrollments(path): list&#xa;+ load_activities(path): list&#xa;+ save_activities(records, path): void" vertex="1">
+          <mxGeometry height="84" width="240" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="note_invariants" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;strokeWidth=1;align=left;verticalAlign=top;spacingTop=6;spacingLeft=8;spacingRight=8;fontColor=#000000;fontSize=10;" value="&lt;b&gt;Class Model Invariants &amp;amp; Design Discipline (Lesson 4 &amp;amp; Lesson 5):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;No Persisted Progress State:&lt;/b&gt; Progress is never modeled as a mutable entity attribute or stored database column. It is dynamically derived via &lt;i&gt;progress(pid, cid)&lt;/i&gt; delegating to &lt;i&gt;ProgressStrategy.calculate()&lt;/i&gt;.&lt;br&gt;• &lt;b&gt;Cohesive Boundaries:&lt;/b&gt; UI widgets (buttons/input fields) and speculative database connection pools are excluded; only cohesive software entities and coordinators from the Lesson 7 implementation baseline are modeled.&lt;br&gt;• &lt;b&gt;Failure Invariant (FB-04):&lt;/b&gt; On validation failure, &lt;i&gt;_validate_preconditions()&lt;/i&gt; raises &lt;i&gt;ValueError&lt;/i&gt; prior to calling &lt;i&gt;ActivityRecord&lt;/i&gt; initialization or &lt;i&gt;save_activities()&lt;/i&gt;." vertex="1">
+          <mxGeometry height="135" width="440" x="300" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_mgr_ar" edge="1" parent="1" source="cls_mgr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=diamond;endFill=1;startArrow=none;fontColor=#000000;fontSize=10;" target="cls_ar">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_mgr_ar_src" parent="rel_mgr_ar" style="edgeLabel;html=1;align=left;verticalAlign=bottom;resizable=0;points=[];fontColor=#000000;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.85" y="-10" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_mgr_ar_tgt" parent="rel_mgr_ar" style="edgeLabel;html=1;align=right;verticalAlign=bottom;resizable=0;points=[];fontColor=#000000;fontSize=10;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.85" y="-10" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_mgr_ar_name" parent="rel_mgr_ar" style="edgeLabel;html=1;align=center;verticalAlign=top;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="- activities" vertex="1">
+          <mxGeometry relative="1" x="0.05" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="QOFPZMJ0sKN0wkL8bMGg-1" parent="rel_mgr_ar" style="edgeLabel;html=1;align=left;verticalAlign=bottom;resizable=0;points=[];fontColor=#000000;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.8999999999999989" as="geometry">
+            <mxPoint x="-190" y="130" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QOFPZMJ0sKN0wkL8bMGg-3" parent="rel_mgr_ar" style="edgeLabel;html=1;align=left;verticalAlign=bottom;resizable=0;points=[];fontColor=#000000;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.8999999999999989" as="geometry">
+            <mxPoint x="-110" y="130" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QOFPZMJ0sKN0wkL8bMGg-4" parent="rel_mgr_ar" style="edgeLabel;html=1;align=left;verticalAlign=bottom;resizable=0;points=[];fontColor=#000000;fontSize=10;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-0.8999999999999989" as="geometry">
+            <mxPoint x="-270" y="130" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QOFPZMJ0sKN0wkL8bMGg-5" parent="rel_mgr_ar" style="edgeLabel;html=1;align=center;verticalAlign=top;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="-challenges" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-500" y="240" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QOFPZMJ0sKN0wkL8bMGg-6" parent="rel_mgr_ar" style="edgeLabel;html=1;align=center;verticalAlign=top;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="- participants" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-70" y="260" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIUd6xUH_gOn6EKGuTad-1" parent="rel_mgr_ar" style="edgeLabel;html=1;align=center;verticalAlign=top;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="- enrollments" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-280" y="220" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_mgr_ch" edge="1" parent="1" source="cls_mgr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=diamond;endFill=0;fontColor=#000000;fontSize=10;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" target="cls_ch">
+          <mxGeometry relative="1" x="0.093" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="330" />
+              <mxPoint x="120" y="436.8" />
+              <mxPoint x="-20" y="436.8" />
+            </Array>
+            <mxPoint x="80" y="332.5" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_mgr_ch" parent="rel_mgr_ch" style="edgeLabel;html=1;align=right;verticalAlign=bottom;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.7569" y="-5" as="geometry">
+            <mxPoint x="15" y="32" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_mgr_pt" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=diamond;endFill=0;fontColor=#000000;fontSize=10;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="cls_pt">
+          <mxGeometry relative="1" x="-0.0668" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="330.9" />
+              <mxPoint x="280" y="435" />
+              <mxPoint x="410" y="435" />
+            </Array>
+            <mxPoint x="280" y="330" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_mgr_pt" parent="rel_mgr_pt" style="edgeLabel;html=1;align=right;verticalAlign=bottom;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.7921" y="-5" as="geometry">
+            <mxPoint x="5" y="28" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_mgr_en" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=diamond;endFill=0;fontColor=#000000;fontSize=10;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="cls_en">
+          <mxGeometry relative="1" x="-0.5673" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="330" />
+            </Array>
+            <mxPoint x="200" y="330" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_mgr_en" parent="rel_mgr_en" style="edgeLabel;html=1;align=right;verticalAlign=bottom;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="0.4386" y="-5" as="geometry">
+            <mxPoint x="5" y="37" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_mgr_strat" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;fontColor=#000000;fontSize=10;">
+          <mxGeometry relative="1" x="0.3847" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="332.4" />
+              <mxPoint x="340" y="382.9" />
+              <mxPoint x="710.7" y="382.9" />
+            </Array>
+            <mxPoint x="340" y="332.4" as="sourcePoint" />
+            <mxPoint x="740" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_mgr_strat" parent="rel_mgr_strat" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="«invokes dynamic query»" vertex="1">
+          <mxGeometry relative="1" x="0.4689" y="-12" as="geometry">
+            <mxPoint x="11" y="107" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_amt_real" edge="1" parent="1" source="cls_amt_strat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=block;endFill=0;dashed=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="cls_strat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_cnt_real" edge="1" parent="1" source="cls_cnt_strat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.2;endArrow=block;endFill=0;dashed=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="cls_strat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_mgr_stor" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=open;endFill=0;dashed=1;fontColor=#000000;fontSize=10;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="pkg_storage">
+          <mxGeometry relative="1" x="0.0528" as="geometry">
+            <Array as="points">
+              <mxPoint x="75.4" y="380" />
+              <mxPoint x="-150" y="380" />
+              <mxPoint x="-150" y="830" />
+              <mxPoint x="110" y="830" />
+            </Array>
+            <mxPoint x="75.4" y="331.4" as="sourcePoint" />
+            <mxPoint x="-190" y="920.43" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_mgr_stor" parent="rel_mgr_stor" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="«invokes save»" vertex="1">
+          <mxGeometry relative="1" x="0.1807" y="-10" as="geometry">
+            <mxPoint x="270" y="122" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIUd6xUH_gOn6EKGuTad-5" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;dashed=1;fontColor=#000000;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.446;entryY=1.059;entryDx=0;entryDy=0;entryPerimeter=0;" target="cls_ch_ops">
+          <mxGeometry relative="1" x="-0.0261" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="760" />
+              <mxPoint x="-30.8" y="760" />
+            </Array>
+            <mxPoint x="140" y="603" as="sourcePoint" />
+            <mxPoint x="-30" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIUd6xUH_gOn6EKGuTad-7" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;dashed=1;fontColor=#000000;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="cls_pt_attrs">
+          <mxGeometry relative="1" x="-0.533" as="geometry">
+            <Array as="points">
+              <mxPoint x="261" y="760" />
+              <mxPoint x="410" y="760" />
+            </Array>
+            <mxPoint x="261" y="603" as="sourcePoint" />
+            <mxPoint x="90" y="722" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIUd6xUH_gOn6EKGuTad-8" parent="GIUd6xUH_gOn6EKGuTad-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="«references»" vertex="1">
+          <mxGeometry relative="1" x="-0.5047" y="-12" as="geometry">
+            <mxPoint x="161" y="-28" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIUd6xUH_gOn6EKGuTad-9" parent="GIUd6xUH_gOn6EKGuTad-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#000000;fontSize=9;" value="«references»" vertex="1">
+          <mxGeometry relative="1" x="-0.7311320754716979" as="geometry">
+            <mxPoint x="-291" y="80" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="3 Sequence Model" id="HWRBU05QqsV1yoID0HdT">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hdr_banner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#000066;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="64" width="750" x="50" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="page_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;b style=&quot;font-size: 17px; color: #ffffff;&quot;&gt;3 RECORD ACTIVITY SEQUENCE MODEL&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #e0e0e0;&quot;&gt;Operational Contract Translation, Precondition Guards &amp;amp; Failure Invariant Flow&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="600" x="125" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_actor" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.2;fontColor=#000000;fontSize=11;size=30;" value=":Participant&#xa;(Actor)" vertex="1">
+          <mxGeometry height="700" width="110" x="55" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_cli" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.2;fontColor=#000000;fontSize=11;size=30;" value=":CLI&#xa;(Boundary)" vertex="1">
+          <mxGeometry height="700" width="100" x="215" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_mgr" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;fontColor=#000000;fontSize=11;size=30;" value=":ChallengeManager&#xa;(Coordinator)" vertex="1">
+          <mxGeometry height="700" width="130" x="370" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_ar" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.2;fontColor=#000000;fontSize=11;size=30;" value=":ActivityRecord&#xa;(Created Entity)" vertex="1">
+          <mxGeometry height="765" width="245" x="555" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_stor" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.2;fontColor=#000000;fontSize=11;size=30;" value="«module»&#xa;:storage" vertex="1">
+          <mxGeometry height="755" width="110" x="700" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="msg_1" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;fontSize=9.5;" value="1: submit Record Activity (participant_id, challenge_id, activity_type, amount, activity_date, note=&quot;&quot;)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="175" as="sourcePoint" />
+            <mxPoint x="265" y="175" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_cli_mgr" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;fontSize=9.5;" value="record_activity(participant_id, challenge_id, activity_type, amount, activity_date, note=&quot;&quot;)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="265" y="200" as="sourcePoint" />
+            <mxPoint x="435" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_1_1" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fontSize=9;" value="&amp;nbsp;_validate_preconditions(participant_id, challenge_id, activity_type, amount, activity_date)&lt;br&gt;[1.1: lookup pid | 1.2: lookup cid | 1.3: verify enrollment | 1.4: amount &amp;gt; 0, date range, type match]">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="465" y="225" />
+              <mxPoint x="465" y="255" />
+            </Array>
+            <mxPoint x="435" y="225" as="sourcePoint" />
+            <mxPoint x="435" y="255" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="alt_frame" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;width=185;height=25;fillColor=none;strokeColor=#b85450;strokeWidth=1.5;fontColor=#000000;fontSize=10;" value="alt [any check fails (e.g. amount &lt;= 0)]" vertex="1">
+          <mxGeometry height="475" width="740" x="50" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="fail_callout" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#b85450;fontSize=9.5;" value="&lt;b&gt;Failure Invariant (FB-04):&lt;/b&gt; Execution halts immediately before entity creation, collection mutation, or disk I/O." vertex="1">
+          <mxGeometry height="25" width="550" x="70" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="msg_fail_exc" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;dashed=1;strokeColor=#b85450;strokeWidth=1.2;fontColor=#b85450;fontSize=9.5;" value="raise ValueError(&quot;Amount must be positive&quot;)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="435" y="345" as="sourcePoint" />
+            <mxPoint x="265" y="345" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_cli_catch" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=block;strokeColor=#6c8ebf;strokeWidth=1;fontColor=#000000;fontSize=9;" value="catch ValueError &amp;amp; format error notice">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="365" />
+              <mxPoint x="290" y="385" />
+            </Array>
+            <mxPoint x="265" y="365" as="sourcePoint" />
+            <mxPoint x="265" y="385" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_fail_ui" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;dashed=1;strokeColor=#b85450;strokeWidth=1.2;fontColor=#b85450;fontSize=9.5;" value="display formatted rejection notice (&quot;Invalid amount: Amount must be positive&quot;)&#xa;[NFB-02: User-friendly feedback, no crash | FB-04: Zero state mutation (5 -&gt; 5)]">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="265" y="415" as="sourcePoint" />
+            <mxPoint x="110" y="415" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="alt_sep" parent="1" style="line;strokeWidth=1;dashed=1;strokeColor=#b85450;fillColor=none;align=left;verticalAlign=middle;fontColor=#b85450;fontStyle=1;fontSize=10;" value="[else (all preconditions valid)]" vertex="1">
+          <mxGeometry height="8" width="740" x="50" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="msg_gen_id" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fontSize=9;" value="generate unique record_id (e.g. &quot;AR-0004&quot;)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="475" />
+              <mxPoint x="460" y="495" />
+            </Array>
+            <mxPoint x="435" y="475" as="sourcePoint" />
+            <mxPoint x="435" y="495" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_1_5" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;fontSize=9.5;" value="1.5: «create» ActivityRecord(record_id, participant_id, challenge_id, activity_type, amount, activity_date, note)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="435" y="525" as="sourcePoint" />
+            <mxPoint x="610" y="525" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_1_5_ret" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;dashed=1;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fontSize=9;" value="return record instance">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="610" y="550" as="sourcePoint" />
+            <mxPoint x="435" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_1_6" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fontSize=9;" value="1.6: activities.append(record) (Count: before + 1)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="575" />
+              <mxPoint x="460" y="595" />
+            </Array>
+            <mxPoint x="435" y="575" as="sourcePoint" />
+            <mxPoint x="435" y="595" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_1_7" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=block;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;fontSize=9.5;" value="1.7: save_activities(self.activities, path)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="435" y="625" as="sourcePoint" />
+            <mxPoint x="750" y="625" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_1_7_ack" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;dashed=1;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fontSize=9;" value="atomic CSV write confirmed">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="650" as="sourcePoint" />
+            <mxPoint x="435" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_1_8" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;dashed=1;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;fontSize=9.5;" value="1.8: return ActivityRecord">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="435" y="680" as="sourcePoint" />
+            <mxPoint x="265" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_confirm_user" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;dashed=1;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;fontSize=9.5;" value="display confirmation (&quot;Activity recorded for P001: 2.0 km&quot;)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="265" y="710" as="sourcePoint" />
+            <mxPoint x="110" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note_contract" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;strokeWidth=1;align=left;verticalAlign=top;spacingTop=6;spacingLeft=8;spacingRight=8;fontColor=#000000;fontSize=9.5;" value="&lt;b&gt;Lesson 5 &amp;amp; Lesson 7 Operational Contract Traceability:&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Before Mutation Phase:&lt;/b&gt; Steps 1.1 to 1.4 evaluate all integrity constraints purely in memory (referential validity, active enrollment pairing, matching activity type, calendar window, and strictly positive amounts).&lt;br&gt;• &lt;b&gt;Failure Invariant (FB-04):&lt;/b&gt; If any precondition fails, execution halts immediately with a specific exception (&lt;i&gt;ValueError&lt;/i&gt;). No &lt;i&gt;ActivityRecord&lt;/i&gt; is created, memory is unmutated, and storage is not touched.&lt;br&gt;• &lt;b&gt;After Validation Succeeded:&lt;/b&gt; Exactly one record is created (1.5), appended to memory (1.6), persisted once through the approved storage boundary (1.7), and returned to the presentation boundary (1.8)." vertex="1">
+          <mxGeometry height="110" width="750" x="45" y="760" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="4 Strategy Pattern Structure" id="PbRecTQm60TKJOp1CwSy">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hdr_banner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#000066;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="64" width="750" x="420" y="-240" as="geometry" />
+        </mxCell>
+        <mxCell id="page_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;b style=&quot;font-size: 17px; color: #ffffff;&quot;&gt;4 STRATEGY PATTERN STRUCTURE&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #e0e0e0;&quot;&gt;Dynamic Metric Calculation, Strategy Encapsulation &amp;amp; Open/Closed Extensibility&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="600" x="495" y="-228" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_context" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=12;fontColor=#000000;" value="«context»&#xa;ChallengeManager" vertex="1">
+          <mxGeometry height="152" width="660" x="460" y="-160" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ctx_attrs" parent="cls_context" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="- challenges: dict[str, Challenge]&#xa;- activities: list[ActivityRecord]&#xa;- _strategies: dict[str, ProgressStrategy]" vertex="1">
+          <mxGeometry height="52" width="660" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ctx_sep" parent="cls_context" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#82b366;" value="" vertex="1">
+          <mxGeometry height="8" width="660" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ctx_ops" parent="cls_context" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=9.5;" value="+ progress(participant_id: str, challenge_id: str): dict&#xa;+ _get_strategy(goal_unit: str): ProgressStrategy&#xa;&lt;i&gt;// Selects strategy by unit mapping:&lt;br&gt;// &#39;km&#39; | &#39;miles&#39; -&gt; AmountProgressStrategy&lt;br&gt;// &#39;session&#39; | &#39;sessions&#39; | &#39;count&#39; -&gt; CountProgressStrategy&lt;/i&gt;" vertex="1">
+          <mxGeometry height="64" width="660" y="88" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_strat_iface" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=34;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1.5;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="«interface, ABC»&#xa;ProgressStrategy" vertex="1">
+          <mxGeometry height="105" width="330" x="825" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_strat_desc" parent="cls_strat_iface" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#555555;fontSize=9;" value="&lt;i&gt;challengehub/strategies.py&lt;/i&gt;" vertex="1">
+          <mxGeometry height="18" width="330" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_strat_sep" parent="cls_strat_iface" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#9673a6;" value="" vertex="1">
+          <mxGeometry height="8" width="330" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_strat_ops" parent="cls_strat_iface" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=9.5;" value="+ calculate(records: list[ActivityRecord],&#xa;   challenge: Challenge): float {abstract}" vertex="1">
+          <mxGeometry height="45" width="330" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_amt_strat" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="AmountProgressStrategy" vertex="1">
+          <mxGeometry height="135" width="220" x="730" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_amt_desc" parent="cls_amt_strat" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=9;" value="&lt;b&gt;Scope:&lt;/b&gt; Distance/Volume metrics&#xa;&lt;b&gt;Goal Units:&lt;/b&gt; &quot;km&quot;, &quot;miles&quot;, &quot;meters&quot;" vertex="1">
+          <mxGeometry height="34" width="220" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_amt_sep" parent="cls_amt_strat" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="8" width="220" y="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_amt_ops" parent="cls_amt_strat" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=9;" value="+ calculate(records: list[ActivityRecord],&#xa;   challenge: Challenge): float&#xa;&lt;i&gt;return round(sum(r.amount&#xa;  for r in records), 2)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="65" width="220" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_cnt_strat" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=28;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="CountProgressStrategy" vertex="1">
+          <mxGeometry height="135" width="220" x="990" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_cnt_desc" parent="cls_cnt_strat" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#333333;fontSize=9;" value="&lt;b&gt;Scope:&lt;/b&gt; Frequency/Session metrics&#xa;&lt;b&gt;Goal Units:&lt;/b&gt; &quot;session&quot;, &quot;sessions&quot;, &quot;count&quot;" vertex="1">
+          <mxGeometry height="34" width="220" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_cnt_sep" parent="cls_cnt_strat" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="8" width="220" y="62" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_cnt_ops" parent="cls_cnt_strat" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=9;" value="+ calculate(records: list[ActivityRecord],&#xa;   challenge: Challenge): float&#xa;&lt;i&gt;return float(len(records))&lt;/i&gt;" vertex="1">
+          <mxGeometry height="65" width="220" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_challenge_ref" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="«entity» Challenge" vertex="1">
+          <mxGeometry height="95" width="200" x="425" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ch_ref_attrs" parent="cls_challenge_ref" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ goal_unit: str&#xa;+ goal_target: float&#xa;&lt;i&gt;(Determines strategy choice)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="69" width="200" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ar_ref" parent="1" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;align=center;fontSize=11;fontColor=#000000;" value="«entity» ActivityRecord" vertex="1">
+          <mxGeometry height="95" width="200" x="425" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ar_ref_attrs" parent="cls_ar_ref" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;spacingRight=6;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#000000;fontSize=10;" value="+ amount: float&#xa;+ activity_type: str&#xa;&lt;i&gt;(Supplies raw accepted inputs)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="69" width="200" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_ctx_strat" edge="1" parent="1" source="cls_context" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;strokeColor=#000000;fontColor=#000000;fontSize=10;endArrow=open;endFill=0;" target="cls_strat_iface">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_ctx_strat" parent="edge_ctx_strat" style="edgeLabel;html=1;align=center;verticalAlign=bottom;resizable=0;points=[];fontColor=#000000;fontSize=9.5;" value="«delegates calculate()»&#xa;1..*" vertex="1">
+          <mxGeometry relative="1" x="0.15" y="-12" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_amt_real" edge="1" parent="1" source="cls_amt_strat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=block;endFill=0;dashed=1;entryX=0.441;entryY=1.019;entryDx=0;entryDy=0;entryPerimeter=0;" target="cls_strat_ops">
+          <mxGeometry relative="1" x="-0.2919" as="geometry">
+            <mxPoint x="810" y="385" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_cnt_real" edge="1" parent="1" source="cls_cnt_strat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.2;endArrow=block;endFill=0;dashed=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="cls_strat_iface">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_strat_ar" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c757d;strokeWidth=1;endArrow=open;dashed=1;fontColor=#555555;fontSize=9;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="cls_ar_ref">
+          <mxGeometry relative="1" x="0.1661" as="geometry">
+            <Array as="points">
+              <mxPoint x="880" y="174.2" />
+              <mxPoint x="880" y="200" />
+              <mxPoint x="720" y="200" />
+              <mxPoint x="720" y="277.5" />
+            </Array>
+            <mxPoint x="870" y="174.2" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_strat_ar" parent="edge_strat_ar" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#555555;fontSize=9;" value="processes records" vertex="1">
+          <mxGeometry relative="1" x="0.3614" y="-10" as="geometry">
+            <mxPoint y="-25" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_strat_ch" edge="1" parent="1" source="cls_strat_iface" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c757d;strokeWidth=1;endArrow=open;dashed=1;fontColor=#555555;fontSize=9;exitX=0;exitY=0.322;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="cls_ch_ref_attrs">
+          <mxGeometry relative="1" x="0.095" as="geometry">
+            <Array as="points">
+              <mxPoint x="625" y="120" />
+              <mxPoint x="440" y="120.5" />
+            </Array>
+            <mxPoint x="270" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_strat_ch" parent="edge_strat_ch" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#555555;fontSize=9;" value="«references target»" vertex="1">
+          <mxGeometry relative="1" x="0.2864" y="-10" as="geometry">
+            <mxPoint x="25" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="box_pattern_rationale" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;strokeWidth=1;align=left;verticalAlign=top;spacingTop=8;spacingLeft=10;spacingRight=10;fontColor=#000000;fontSize=9.5;" value="&lt;b style=&quot;font-size:10.5px;&quot;&gt;Architecture Decision Record (ADR) - Strategy Pattern Justification:&lt;/b&gt;&lt;hr style=&quot;margin: 4px 0;&quot;&gt;&lt;p style=&quot;margin:0px; line-height:1.35;&quot;&gt;• &lt;b&gt;Concrete Problem Addressed:&lt;/b&gt; ChallengeHub requires fundamentally distinct progress metrics across challenge types: distance challenges sum continuous values (&lt;i&gt;AmountProgressStrategy&lt;/i&gt;), while habit/session challenges count discrete occurrences (&lt;i&gt;CountProgressStrategy&lt;/i&gt;). Hardcoding conditional checks inside &lt;i&gt;ChallengeManager&lt;/i&gt; creates high cyclomatic complexity and violates the Open/Closed Principle.&lt;br&gt;&lt;br&gt;• &lt;b&gt;Selected Pattern Role:&lt;/b&gt; Implements the Gang-of-Four &lt;b&gt;Strategy Pattern&lt;/b&gt;. The interface &lt;i&gt;ProgressStrategy&lt;/i&gt; encapsulates the calculation algorithm. New metric behaviors (e.g., pace, elevation, weighted sums) can be integrated without modifying the core application coordinator.&lt;br&gt;&lt;br&gt;• &lt;b&gt;Trade-Offs &amp;amp; Deferred Alternatives:&lt;/b&gt;&lt;br&gt;  - &lt;i&gt;Factory Pattern Rejected:&lt;/i&gt; Instantiating strategy instances via a dedicated Factory class was rejected as decorative abstraction; a direct dictionary lookup inside &lt;i&gt;_get_strategy()&lt;/i&gt; is cohesive and maintainable.&lt;br&gt;  - &lt;i&gt;Observer Pattern Rejected:&lt;/i&gt; Progress notifications via publisher/subscriber listeners were deferred to avoid speculative complexity in a synchronous CLI runtime.&lt;br&gt;&lt;br&gt;• &lt;b&gt;Derived Progress Invariant:&lt;/b&gt; The system enforces that progress is purely dynamic—calculated upon query from the immutable accepted records collection, eliminating the risk of stored state drift or synchronization bugs.&lt;/p&gt;" vertex="1">
+          <mxGeometry height="230" width="750" x="440" y="470" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="E3QWeypA7RK2YwfvggKF" name="5 Traceability Matrix">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hdr_banner" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#000066;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="64" width="790" x="30" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="page_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;b style=&quot;font-size: 17px; color: #ffffff;&quot;&gt;5 CROSS-MODEL TRACEABILITY MATRIX&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 11px; color: #e0e0e0;&quot;&gt;Requirements, Operational Contracts, Architecture Layers &amp;amp; Verification Mapping&lt;/span&gt;" vertex="1">
+          <mxGeometry height="40" width="600" x="125" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c757d;strokeWidth=1.5;align=left;verticalAlign=top;spacingTop=6;spacingLeft=8;spacingRight=8;fontColor=#000000;" value="" vertex="1">
+          <mxGeometry height="425" width="790" x="30" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="tbl_content" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontColor=#000000;fontSize=9.5;" value="&lt;table border=&quot;1&quot; cellpadding=&quot;5&quot; cellspacing=&quot;0&quot; style=&quot;border-collapse: collapse; width: 100%; border: 1px solid #495057;&quot;&gt;   &lt;tr style=&quot;background-color: #f1f3f5; text-align: center; font-weight: bold;&quot;&gt;     &lt;td style=&quot;width: 10%;&quot;&gt;Req. ID&lt;/td&gt;     &lt;td style=&quot;width: 14%;&quot;&gt;Use Case / Task&lt;/td&gt;     &lt;td style=&quot;width: 25%;&quot;&gt;Operational Contract Clause&lt;/td&gt;     &lt;td style=&quot;width: 26%;&quot;&gt;Model &amp;amp; Code Component&lt;/td&gt;     &lt;td style=&quot;width: 25%;&quot;&gt;Verification Evidence&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;FB-01&lt;br&gt;FB-02&lt;/td&gt;     &lt;td&gt;&lt;b&gt;UC-05&lt;/b&gt;: Record Activity (Normal Path)&lt;/td&gt;     &lt;td&gt;&lt;b&gt;Success Postcondition:&lt;/b&gt; Exactly one valid ActivityRecord is instantiated, appended to in-memory activities collection, and persisted once.&lt;/td&gt;     &lt;td&gt;• &lt;b&gt;Page 1/2:&lt;/b&gt; ChallengeManager, ActivityRecord&lt;br&gt;• &lt;b&gt;Page 3:&lt;/b&gt; Messages 1.5, 1.6, 1.7, 1.8&lt;br&gt;• &lt;b&gt;Code:&lt;/b&gt; manager.py &lt;i&gt;record_activity()&lt;/i&gt;&lt;/td&gt;     &lt;td&gt;&lt;b&gt;Notebook Act 4:&lt;/b&gt; Normal Path Execution&lt;br&gt;• Count: 3 → 4&lt;br&gt;• Total updates: 7.5 → 9.5 km&lt;br&gt;• Disk: CSV row appended (atomic)&lt;/td&gt;   &lt;/tr&gt;   &lt;tr style=&quot;background-color: #fafafa;&quot;&gt;     &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;FB-03&lt;br&gt;FB-04&lt;/td&gt;     &lt;td&gt;&lt;b&gt;UC-05&lt;/b&gt;: Guard &amp;amp; Failure Invariant&lt;/td&gt;     &lt;td&gt;&lt;b&gt;Precondition &amp;amp; Failure Invariant:&lt;/b&gt; Validates referential existence, enrollment, date window, and positive amount. Rejection causes ZERO state mutation.&lt;/td&gt;     &lt;td&gt;• &lt;b&gt;Page 2:&lt;/b&gt; _validate_preconditions()&lt;br&gt;• &lt;b&gt;Page 3:&lt;/b&gt; Messages 1.1–1.4 &amp;amp; &lt;i&gt;alt [precondition fails]&lt;/i&gt;&lt;br&gt;• &lt;b&gt;Code:&lt;/b&gt; manager.py in-memory guards&lt;/td&gt;     &lt;td&gt;&lt;b&gt;Notebook Act 4:&lt;/b&gt; Failure Invariant Check&lt;br&gt;• Raises &lt;i&gt;ValueError&lt;/i&gt;&lt;br&gt;• Count unchanged: 5 → 5&lt;br&gt;• Disk/Memory: Zero state mutation&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;FB-05&lt;/td&gt;     &lt;td&gt;&lt;b&gt;UC-04&lt;/b&gt;: View Progress&lt;/td&gt;     &lt;td&gt;&lt;b&gt;Derived Query:&lt;/b&gt; Progress is calculated on demand from accepted activities using the assigned strategy; no mutable stored total column.&lt;/td&gt;     &lt;td&gt;• &lt;b&gt;Page 2/4:&lt;/b&gt; ProgressStrategy, AmountProgressStrategy, CountProgressStrategy&lt;br&gt;• &lt;b&gt;Code:&lt;/b&gt; strategies.py, manager.progress(), manager._get_strategy()&lt;/td&gt;     &lt;td&gt;&lt;b&gt;Reconciled PO4 Evidence:&lt;/b&gt;&lt;br&gt;• Summary: 7.5 km / 20.0 km target (37.5% baseline completion)&lt;br&gt;• Matplotlib progress curve (P001 / C001)&lt;/td&gt;   &lt;/tr&gt;   &lt;tr style=&quot;background-color: #fafafa;&quot;&gt;     &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;FB-07&lt;br&gt;NFB-03&lt;/td&gt;     &lt;td&gt;Persistence &amp;amp; Durability&lt;/td&gt;     &lt;td&gt;&lt;b&gt;Persistence Postcondition:&lt;/b&gt; Accepted activity records survive application shutdown; reload re-establishes state without loss.&lt;/td&gt;     &lt;td&gt;• &lt;b&gt;Page 1/2:&lt;/b&gt; «module» storage.py&lt;br&gt;• &lt;b&gt;Page 3:&lt;/b&gt; Message 1.7 save_activities()&lt;br&gt;• &lt;b&gt;Code:&lt;/b&gt; storage.py CSV serialization&lt;/td&gt;     &lt;td&gt;&lt;b&gt;Notebook Act 4:&lt;/b&gt; Persistence Durability&lt;br&gt;• activities.csv line count = 6 (1 hdr + 5 rows)&lt;br&gt;• Reloaded manager restored count=5 and total=9.51 km&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td style=&quot;text-align: center; font-weight: bold;&quot;&gt;NFB-01&lt;br&gt;NFB-02&lt;/td&gt;     &lt;td&gt;Layering &amp;amp; Error Handling&lt;/td&gt;     &lt;td&gt;&lt;b&gt;Architectural Integrity &amp;amp; Error Safety:&lt;/b&gt; Unidirectional downward dependencies; domain core has 0 external I/O imports; CLI catches exceptions to prevent stack trace crashes.&lt;/td&gt;     &lt;td&gt;• &lt;b&gt;Page 1:&lt;/b&gt; Presentation → Application → Domain / Persistence&lt;br&gt;• &lt;b&gt;Page 3:&lt;/b&gt; CLI catches ValueError&lt;br&gt;• &lt;b&gt;Code:&lt;/b&gt; cli.py, manager.py, models.py&lt;/td&gt;     &lt;td&gt;&lt;b&gt;Notebook Act 1 &amp;amp; Act 4:&lt;/b&gt;&lt;br&gt;• AST import inspection confirms models.py has no UI/file imports&lt;br&gt;• Fresh ZIP extract passes pytest 3/3&lt;/td&gt;   &lt;/tr&gt; &lt;/table&gt;" vertex="1">
+          <mxGeometry height="425" width="730" x="60" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="box_baseline_freeze" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;strokeWidth=1;align=left;verticalAlign=top;spacingTop=6;spacingLeft=10;spacingRight=10;fontColor=#000000;fontSize=10;" value="&lt;b style=&quot;font-size:11px;&quot;&gt;Module 2 Release Candidate Baseline Summary &amp;amp; Handoff Gate:&lt;/b&gt;&lt;hr style=&quot;margin: 4px 0;&quot;&gt;&lt;p style=&quot;margin:0px; line-height:1.4;&quot;&gt;• &lt;b&gt;Authoritative Model Scope:&lt;/b&gt; Pages 1 through 5 represent the fully reconciled implementation state frozen from Lesson 7 (M2LA2) and verified in Lesson 8 (PO4/M2CW). All classes, associations, and lifelines correspond directly to the executable Python prototype.&lt;br&gt;• &lt;b&gt;Invariant Inviolability:&lt;/b&gt; Verified that invalid submissions never mutate state (FB-04), progress calculations remain dynamically derived (FB-05), and persistence operates atomically via approved write-through boundaries (FB-07).&lt;br&gt;• &lt;b&gt;Handoff to Module IS:&lt;/b&gt; This design workbook, along with &lt;i&gt;Team01_M2CW_Codebase.zip&lt;/i&gt; and &lt;i&gt;Team01_M2CW_ReleaseCandidate.ipynb&lt;/i&gt;, freezes the baseline architecture for the Final Integration Project (embedded SQLite migration and formal Repository pattern implementation).&lt;/p&gt;" vertex="1">
+          <mxGeometry height="145" width="750" x="40" y="550" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
